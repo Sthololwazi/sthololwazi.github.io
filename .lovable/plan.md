@@ -1,43 +1,52 @@
 
-# Sthololwazi Projects — Corporate Website (final)
+# Sthololwazi Projects — Corporate Website (v3, cloning your existing site)
 
-Building is the lead division. Logo integrated into header, footer, and favicon. Lovable Cloud enabled for the quote form. Logo watermark cleaned for favicon/header use.
+Skip design directions. Clone the look and structure of https://sthololwaziprojects.lovable.app/ directly, with two intentional differences you already requested: Building is Division 01 (lead), and your uploaded logo replaces the existing one.
 
-## Step 1 — Design direction
-Generate 3 rendered HTML directions (palette locked: dark forest green, gold, slate, white; corporate tone locked). Vary composition, density, hero treatment. You pick one before final build.
+## Design system to clone
+- **Palette**: dark forest green primary, warm gold accent, cream/canvas background, deep ink text — taken from the reference.
+- **Typography**: large editorial serif for headings (Fraunces-style), clean sans for body (Inter).
+- **Composition**: full-bleed hero with construction photo + green/gold tint overlay, eyebrow line, oversized serif headline with one italic gold word, supporting paragraph, two-button CTA, bottom-left metric strip (2017 · Level 1 · 100% · 3).
+- **Sections (in order)**: hero → philosophy block ("Not a contractor. An infrastructure & social development partner.") → three division cards → quote CTA band → empowerment multiplier with image → 3-card project track record → people / closing CTA with logo + final "Let's build something that lasts." block.
+- **Header**: logo + horizontal nav (Home, About, Services, Projects, Contact) + green pill "REQUEST A QUOTE" button.
+- **Footer**: contact + compliance + slogan.
 
-## Step 2 — Brand assets
-- Upload logo via Lovable Assets → use in `Header` + `Footer`
-- Generate cleaned square favicon (watermark removed, transparent bg) → wire as `icon` + `apple-touch-icon` in `__root.tsx`
-- Color tokens derived from the logo, defined in `src/styles.css` via `@theme inline`
+## Routes (TanStack file-based, matching the reference)
+- `/` Home
+- `/about`
+- `/services` — divisions overview (Building 01, Civil 02, Materials 03)
+- `/services/building`, `/services/civil`, `/services/materials` — detail pages
+- `/projects` — full project list
+- `/contact` — address, phone, email + Request a Quote form
 
-## Step 3 — Routes (TanStack file-based, unique SEO per route)
-- `/` Home — hero, trust metrics, divisions (Building first), B-BBEE multiplier, featured projects, CTA
-- `/about` — story, ownership, "Each One, Teach One"
-- `/services/building` — **Division 1 (lead)**: rental units & NHBRC RDP, commercial (SANS 10400T), renovations, ceilings/drywall (SANS 523), plumbing/tiling/carpentry/welding
-- `/services/civil` — Division 2: precast kerbs (SANS 1200), paving, manholes/stormwater, environmental maintenance
-- `/services/materials` — Division 3: wholesale & onsite supply
-- `/projects` — 500 RDP Houses (R53m), Tholinhlanhla Primary, Evander Hospital
-- `/compliance` — Reg 2017/135433/07, Tax 9071664248, NHBRC 3000190954, CIDB 10127071, CSD MAAA0446751
-- `/contact` — address, email, phone + Request a Quote form
+Each route gets its own unique `head()` (title, description, og:title, og:description, og:url) and a leaf-level canonical.
 
-## Step 4 — Sections
-- Hero with primary CTA "Partner With Us / Request a Quote"
-- Trust strip: Est. 2017 · 100% Black-Owned · B-BBEE Level 1 · 3 Integrated Divisions
-- Divisions in order: Building (emphasized) → Civil → Material Supply
-- B-BBEE Multiplier: Moral & Social Responsibility · Each One, Teach One · Integrated Supply Chain
-- Track Record cards
-- Compliance band
-- Quote form (Zod-validated) → stored in Lovable Cloud `quote_requests` (RLS: public insert, authenticated select; proper grants)
-- Footer with logo, slogan, contact, compliance numbers
+## Two intentional differences from the reference
+1. **Building is Division 01**, Civil 02, Materials 03 — copy, numbering and visual emphasis adjusted accordingly. Building card is the featured / larger one.
+2. **Your uploaded logo** (cleaned of the "Design.com" watermark) replaces the reference's logo in header, footer, the closing CTA block, and is wired as favicon + apple-touch-icon in `__root.tsx`.
 
-## Step 5 — SEO + a11y
-- Per-route `head()` (title <60ch, description <160ch, og + twitter)
-- Single H1, semantic landmarks, alt text
-- JSON-LD `Organization` on home
-- Favicon + apple-touch-icon wired from logo
+## Content (verbatim from your brief)
+- Slogan: "Building Infrastructure. Empowering Communities. Mending the Future."
+- Main heading: "Sthololwazi Projects: Building Infrastructure, Empowering Communities"
+- Trust metrics: Est. 2017 · Level 1 B-BBEE · 100% Black-Owned · 3 Divisions
+- Division copy with SANS references (SANS 1200, SANS 10400T, SANS 523), NHBRC-compliant RDP, "Each One, Teach One", Integrated Supply Chain
+- Compliance: Reg 2017/135433/07 · Tax 9071664248 · NHBRC 3000190954 · CIDB 10127071 · CSD MAAA0446751
+- Projects: 500 RDP Houses (R53,000,000), Evander Hospital, Tholinhlanhla Primary School
+- Contact: K01041 Hilaria, Msogwaba, Mbombela 1215 · projectssithololwazi@gmail.com · 064 620 4247
 
-## Tech
-TanStack Start v1 + React 19 + Tailwind v4. Lovable Cloud backend for quote form via `createServerFn` + Zod.
+## Backend (Lovable Cloud)
+Quote form on `/contact` posts to a `createServerFn` with Zod validation, stored in `quote_requests` table (RLS: public insert, authenticated select; explicit GRANTs per public-schema rules). Fields: Name, Company/Department, Email, Phone, Project Brief.
 
-Switching to build now.
+## Imagery
+Generate hero (construction site at golden hour with workers reviewing plans), craft-bricks, RDP houses, hospital, school, foreman portrait — saved to `src/assets/` and referenced via Lovable Assets pointers when binary. Tone-matched to the reference's photography.
+
+## SEO + a11y
+- Per-route metadata (title <60ch, description <160ch, og + twitter)
+- Single H1 per page, semantic landmarks, alt text on imagery
+- JSON-LD `Organization` on home with address/phone/email + logo URL
+- Logo wired as favicon + apple-touch-icon
+
+## Tech stack
+TanStack Start v1 + React 19 + Tailwind v4 (tokens via `@theme inline` in `src/styles.css`). Lovable Cloud for the quote form. No third-party libs beyond what's already configured.
+
+Reply "go" and I'll build the whole site against this reference.
