@@ -190,21 +190,27 @@ return (
                 </button>
               </div>
 
-              {submitted && (
-                <div className="mt-6 flex items-start gap-3 rounded-lg border border-forest/20 bg-forest/5 p-4 text-sm text-forest">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
-<div>
-  <div className="font-semibold">WhatsApp opened successfully.</div>
-  Please press <strong>Send</strong> in WhatsApp to submit your quote request.
-  Our team aims to respond within <strong>24 hours</strong>.
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
-      </section>
+            {submitted && (
+  <div className="mt-6 flex items-start gap-3 rounded-lg border border-forest/20 bg-forest/5 p-4 text-sm text-forest">
+    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+    <div>
+      <div className="font-semibold">
+        WhatsApp opened successfully.
+      </div>
 
-      <style>{`
+      <p className="mt-1">
+        Please press <strong>Send</strong> in WhatsApp to submit your quote
+        request. Our team aims to respond within <strong>24 hours</strong>.
+      </p>
+    </div>
+  </div>
+)}
+      </form>
+    </div>
+  </div>
+</section>
+
+ <style>{`
         .form-input {
           width: 100%;
           border-radius: 0.5rem;
