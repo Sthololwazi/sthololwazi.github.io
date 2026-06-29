@@ -7,17 +7,18 @@ import { Mail, MapPin, Phone, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/site/Layout";
 import { SITE } from "@/lib/site";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Request a Quote Sthololwazi Projects" },
+      { title: "Contact & Request a Quote — Sthololwazi Projects" },
       {
         name: "description",
         content:
           "Request a quote or contact Sthololwazi Projects in Mbombela, Mpumalanga. 48-hour reply on tender and private development enquiries.",
       },
-      { property: "og:title", content: "Contact  Sthololwazi Projects" },
+      { property: "og:title", content: "Contact — Sthololwazi Projects" },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -43,31 +44,23 @@ function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<QuoteValues>({ resolver: zodResolver(quoteSchema) });
 
-const onSubmit = async (values: QuoteValues) => {
-  try {
-    const message = `New Quote Request  Sthololwazi Projects
-
-Name: ${values.name}
-Company: ${values.company || "Not provided"}
-Email: ${values.email}
-Phone: ${values.phone}
-
-Project brief:
-${values.project_brief}`;
-
-    const whatsappUrl = `https://wa.me/27646204247?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-
-    toast.success("Request received  WhatsApp has been opened.");
-
+  const onSubmit = async (values: QuoteValues) => {
+    const { error } = await supabase.from("quote_requests").insert({
+      name: values.name,
+      company: values.company || null,
+      email: values.email,
+      phone: values.phone,
+      project_brief: values.project_brief,
+    });
+    if (error) {
+      console.error(error);
+      toast.error("Could not send your request. Please try again or call us.");
+      return;
+    }
+    toast.success("Thank you — we'll reply within 48 hours.");
     setSubmitted(true);
     reset();
-  } catch (error) {
-    console.error(error);
-    toast.error("Unable to open WhatsApp. Please try again or call us.");
-  }
-};
+  };
 
   return (
     <SiteLayout>
@@ -80,7 +73,7 @@ ${values.project_brief}`;
             Let's build something that lasts.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/75">
-            Tell us about your scope  tender, private development, renovation or material supply.
+            Tell us about your scope — tender, private development, renovation or material supply.
             We respond within 48 hours.
           </p>
         </div>
