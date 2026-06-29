@@ -7,18 +7,17 @@ import { Mail, MapPin, Phone, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/site/Layout";
 import { SITE } from "@/lib/site";
-import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Request a Quote — Sthololwazi Projects" },
+      { title: "Contact Sthololwazi Projects" },
       {
         name: "description",
         content:
-          "Request a quote or contact Sthololwazi Projects in Mbombela, Mpumalanga. 48-hour reply on tender and private development enquiries.",
+          "Request a quote or contact Sthololwazi Projects in Mbombela, Mpumalanga. Express 24 hr response on enquiries.",
       },
-      { property: "og:title", content: "Contact — Sthololwazi Projects" },
+      { property: "og:title", content: "Contact Sthololwazi Projects" },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -44,23 +43,33 @@ function ContactPage() {
     formState: { errors, isSubmitting },
   } = useForm<QuoteValues>({ resolver: zodResolver(quoteSchema) });
 
-  const onSubmit = async (values: QuoteValues) => {
-    const { error } = await supabase.from("quote_requests").insert({
-      name: values.name,
-      company: values.company || null,
-      email: values.email,
-      phone: values.phone,
-      project_brief: values.project_brief,
-    });
-    if (error) {
-      console.error(error);
-      toast.error("Could not send your request. Please try again or call us.");
-      return;
-    }
-    toast.success("Thank you — we'll reply within 48 hours.");
+const onSubmit = async (values: QuoteValues) => {
+  try {
+const message = `*New Quote Request – Sthololwazi Projects*
+
+*Name:* ${values.name}
+*Company:* ${values.company || "Not provided"}
+*Email:* ${values.email}
+*Phone:* ${values.phone}
+
+*Project Brief:*
+${values.project_brief}`;
+
+    const whatsappUrl = `https://wa.me/27646204247?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+   toast.success(
+  "Your quote request has been prepared. Please press Send in WhatsApp to complete the submission."
+);
+
     setSubmitted(true);
     reset();
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error("Unable to open WhatsApp. Please try again or call us.");
+  }
+};
 
   return (
     <SiteLayout>
@@ -176,7 +185,7 @@ function ContactPage() {
                   {isSubmitting ? (
                     <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>
                   ) : (
-                    <>Send request</>
+                    <>Send via WhatsApp</>
                   )}
                 </button>
               </div>
@@ -185,8 +194,8 @@ function ContactPage() {
                 <div className="mt-6 flex items-start gap-3 rounded-lg border border-forest/20 bg-forest/5 p-4 text-sm text-forest">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
                   <div>
-                    <div className="font-semibold">Request received.</div>
-                    A member of the team will be in touch within 48 hours.
+                   <div className="font-semibold">WhatsApp opened successfully.</div>
+Please press <strong>Send</strong> in WhatsApp to submit your quote request. Our team will respond within 48 hours.
                   </div>
                 </div>
               )}
