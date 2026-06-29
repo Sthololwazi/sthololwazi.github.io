@@ -55,16 +55,15 @@ const message = `*New Quote Request – Sthololwazi Projects*
 *Project Brief:*
 ${values.project_brief}`;
 
-    const whatsappUrl =
-  `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-   toast.success(
+toast.success(
   "Your quote request has been prepared. Please press Send to WhatsApp to complete the submission."
 );
 
-    setSubmitted(true);
+setSubmitted(true);
     reset();
   } catch (error) {
     console.error(error);
@@ -72,7 +71,7 @@ ${values.project_brief}`;
   }
 };
 
-  return (
+return (
     <SiteLayout>
       <section className="border-b border-border bg-background">
         <div className="mx-auto max-w-7xl px-5 pt-20 pb-12 lg:px-10 lg:pt-28">
