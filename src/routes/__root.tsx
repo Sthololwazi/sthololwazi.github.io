@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import logo from "@../assts/logocircle.jpg";
+import logo from "..logocircle.jpg";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "../components/ui/sonner";
 
@@ -86,14 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       //{Title: "Official website of Sthololwazi Projects" },
       { property: "og:title", content: "Official website of Sthololwazi Projects" },
-      { name: "twitter:title", content: "Official website of Sthololwazi Projects" },
+      { name: "twitter:title", content: "X Sthololwazi Projects" },
       { name: "description", content: "Sthololwazi Projects (Pty) Ltd is a CIDB-registered South African construction company delivering civil engineering, building construction, renovations, maintenance and material supply throughout Mpumalanga." },
       { property: "og:description", content: "Sthololwazi Projects (Pty) Ltd is a CIDB-registered South African construction company delivering civil engineering, building construction, renovations, maintenance and material supply throughout Mpumalanga." },
       { name: "twitter:description", content: "Sthololwazi Projects (Pty) Ltd is a CIDB-registered South African construction company delivering civil engineering, building construction, renovations, maintenance and material supply throughout Mpumalanga." },
-      {property: "og:image", content: "https://sthololwaziprojects.co.za/og-image.jpg",},
+      {property: "og:image", content: "https://sthololwaziprojects.co.za/image.jpg",},
       {name: "twitter:image",  content: "https://sthololwaziprojects.co.za/og-image.jpg",},
-    ],
-    links: [
+     ],
+     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/jpeg", href: logo },
       { rel: "apple-touch-icon", href: logo },
