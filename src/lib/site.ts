@@ -5,12 +5,12 @@ export const SITE = {
   shortName: "Sthololwazi Projects",
   slogan: "Building Infrastructure. Empowering Communities. Mending the Future.",
   established: 2017,
-  region: "Mbombela, Mpumalanga",
+  region: "Msogwaba, Mbombela, Mpumalanga",
   phone: "064 620 4247",
   phoneIntl: "+27646204247",
   whatsapp: "27646204247",
   email: "projectssthololwazi@gmail.com",
-  address: "K01041 Hilaria, Msogwaba, Mbombela 1215, Mpumalanga, South Africa",
+  address: "K010411 Hilaria, Msogwaba, Mbombela 1215, Mpumalanga, South Africa",
   logo: logoUrl,
   
   social: {
